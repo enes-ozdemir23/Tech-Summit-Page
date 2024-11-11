@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' stroke='%23001F3F' stroke-width='8' fill='none'/><circle cx='50' cy='50' r='30' stroke='%23003366' stroke-width='6' fill='none'/><circle cx='50' cy='50' r='15' stroke='%23004080' stroke-width='4' fill='%23004080'/></svg>">
+
+    <title>Tech Summit 2024</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS kodları -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button class="btn btn-primary rounded-circle scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toastr bildirimleri  -->
+    <div class="toast custom-toast" role="alert" id="successToast">
+        <div class="toast-header">
+            <strong class="me-auto">Başarılı!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            Kayıt işleminiz başarıyla tamamlandı.
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tech Summit 2024</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Hakkında</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#speakers">Konuşmacılar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#register">Kayıt</a>
+                    </li>
+                </ul>
+                <!-- KARANLIK MOD  -->
+                <div class="ms-3 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                    <label class="form-check-label text-light" for="darkModeSwitch">
+                        <i class="fas fa-moon"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-animation">
+            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Arka plan gradyanı -->
+                <defs>
+                    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#000B1F;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#001F3F;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" style="stop-color:rgba(0,255,255,0.3);stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+                    </radialGradient>
+            
+                    <!-- Güçlendirilmiş glow efekti -->
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+            
+                    <!-- Extra parlak glow -->
+                    <filter id="superGlow" x="-100%" y="-100%" width="300%" height="300%">
+                        <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Arka plan -->
+                <rect width="800" height="400" fill="url(#bgGradient)"/>
+                <circle cx="400" cy="200" r="180" fill="url(#glowGradient)"/>
+                
+                <!-- Hareketli Grid Sistemi -->
+                <g stroke="rgba(0,255,255,0.2)" stroke-width="0.5">
+                    <path d="M0 50 h800">
+                        <animate attributeName="transform" type="translate" from="0 0" to="0 10" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M0 100 h800">
+                        <animate attributeName="transform" type="translate" from="0 0" to="0 -10" dur="4s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M0 150 h800">
+                        <animate attributeName="transform" type="translate" from="0 0" to="0 15" dur="5s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M0 200 h800">
+                        <animate attributeName="transform" type="translate" from="0 0" to="0 -15" dur="4s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M0 250 h800">
+                        <animate attributeName="transform" type="translate" from="0 0" to="0 10" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+            
+                <!-- Ana Animasyon Grubu -->
+                <g transform="translate(400,200)">
+                    <!-- Dış Pulse Halkaları -->
+                    <g>
+                        <circle cx="0" cy="0" r="120" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.3">
+                            <animate attributeName="r" values="100;150;100" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="0" cy="0" r="100" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.3">
+                            <animate attributeName="r" values="80;130;80" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+            
+                    <!-- Merkez Daire -->
+                    <circle cx="0" cy="0" r="80" fill="none" stroke="#00ffff" stroke-width="4" filter="url(#superGlow)">
+                        <animate attributeName="r" values="75;85;75" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="stroke-width" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+            
+                    <!-- Dönen Çokgenler -->
+                    <g filter="url(#glow)">
+                        <g>
+                            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite"/>
+                            <path d="M-100,0 L-50,-87 L50,-87 L100,0 L50,87 L-50,87 Z" 
+                                  fill="none" stroke="#4d94ff" stroke-width="2"/>
+                        </g>
+                        <g>
+                            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="15s" repeatCount="indefinite"/>
+                            <path d="M-80,0 L-40,-69 L40,-69 L80,0 L40,69 L-40,69 Z" 
+                                  fill="none" stroke="#ff3366" stroke-width="2"/>
+                        </g>
+                    </g>
+            
+                    <!-- Merkez İkon -->
+                    <g transform="translate(-30,-30)" filter="url(#superGlow)">
+                        <rect x="0" y="0" width="60" height="60" rx="10" fill="#ff3366">
+                            <animate attributeName="fill" values="#ff3366;#4d94ff;#ff3366" dur="4s" repeatCount="indefinite"/>
+                        </rect>
+                        <path d="M15 30 h30 M30 15 v30" stroke="white" stroke-width="4"/>
+                    </g>
+            
+                    <!-- Dalgalı Çizgiler -->
+                    <path d="M-150,50 Q-100,20 -50,50 T50,50 T150,50" 
+                          fill="none" stroke="#00ff99" stroke-width="3" filter="url(#glow)">
+                        <animate attributeName="d" 
+                                 values="M-150,50 Q-100,20 -50,50 T50,50 T150,50;
+                                        M-150,30 Q-100,60 -50,30 T50,30 T150,30;
+                                        M-150,50 Q-100,20 -50,50 T50,50 T150,50"
+                                 dur="4s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+            
+                <!-- Uçan Parçacıklar -->
+                <g filter="url(#superGlow)">
+                    <!-- Çoklu parçacıklar -->
+                    <g>
+                        <circle cx="100" cy="100" r="2" fill="#ffffff">
+                            <animate attributeName="cx" values="0;800;0" dur="7s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="0;400;0" dur="5s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1;3;1" dur="5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="700" cy="300" r="2" fill="#00ffff">
+                            <animate attributeName="cx" values="800;0;800" dur="8s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="400;0;400" dur="6s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="400" cy="100" r="2" fill="#ff3366">
+                            <animate attributeName="cx" values="400;200;400" dur="5s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="0;400;0" dur="6s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1;3;1" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </g>
+            
+                <!-- Yanıp Sönen Yıldızlar -->
+                <g>
+                    <g fill="#ffffff" filter="url(#glow)">
+                        <circle cx="150" cy="50" r="1">
+                            <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1;2;1" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="650" cy="150" r="1">
+                            <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="350" cy="350" r="1">
+                            <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1;2;1" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </g>
+            
+                <!-- Title -->
+                <g transform="translate(400,320)" filter="url(#superGlow)">
+                    <text text-anchor="middle" fill="#ffffff" font-size="24" font-family="Arial" font-weight="bold">
+                        TECH SUMMIT 2024
+                        <animate attributeName="fill" values="#ffffff;#00ffff;#ffffff" dur="3s" repeatCount="indefinite"/>
+                    </text>
+                </g>
+            
+                <!-- Enerji Dalgaları -->
+                <g stroke="#4d94ff" fill="none" opacity="0.3">
+                    <path d="M0,200 Q200,180 400,200 Q600,220 800,200">
+                        <animate attributeName="d" 
+                                 values="M0,200 Q200,180 400,200 Q600,220 800,200;
+                                        M0,200 Q200,220 400,200 Q600,180 800,200;
+                                        M0,200 Q200,180 400,200 Q600,220 800,200"
+                                 dur="5s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+            </svg>
+        </div>
+        <div class="container text-center">
+            <h1 class="display-1 mb-4">Tech Summit 2024</h1>
+            <p class="lead mb-5">Teknolojinin Geleceğini Şekillendiriyoruz</p>
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-auto">
+                    <div class="countdown-item">
+                        <h2 id="days">00</h2>
+                        <span>Gün</span>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="countdown-item">
+                        <h2 id="hours">00</h2>
+                        <span>Saat</span>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="countdown-item">
+                        <h2 id="minutes">00</h2>
+                        <span>Dakika</span>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="countdown-item">
+                        <h2 id="seconds">00</h2>
+                        <span>Saniye</span>
+                    </div>
+                </div>
+            </div>
+            <a href="#register" class="btn btn-danger btn-lg">Hemen Kaydol</a>
+            <button class="btn btn-outline-light btn-lg ms-3" data-bs-toggle="modal" data-bs-target="#videoModal">
+                <i class="fas fa-play me-2"></i>Tanıtım Videosu
+            </button>
+        </div>
+    </section>
+    <!-- HAKKINDA -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Etkinlik Hakkında</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-microphone-alt fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">40+ Konuşmacı</h3>
+                            <p class="card-text">Alanında uzman konuşmacılarla teknolojinin geleceğini keşfedin.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">1000+ Katılımcı</h3>
+                            <p class="card-text">Sektörün önde gelen isimleriyle networking fırsatı.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-laptop-code fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">20+ Workshop</h3>
+                            <p class="card-text">Uygulamalı workshoplarla pratik deneyim kazanın.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Etkinlik Tanıtım Videosu(Tıklayın)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <a href="https://www.youtube.com/watch?v=BVI3xdKvZrU&pp=ygUZZWxhesSxxJ8gZ2Vuw6dsaWsgbWVya2V6aQ%3D%3D" target="_blank">
+                            <img src="assets/images/tanitim.jpg" alt="Video placeholder" class="img-fluid">
+                        </a>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KONUKLAR -->
+    <section id="speakers" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Konuşmacılarımız</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card speaker-card">
+                        <img src="assets/images/ahmet.jpg" width="200" height="250" class="card-img-top" alt="Speaker 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ahmet Yılmaz</h5>
+                            <p class="card-text">AI Araştırmacısı</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-dark me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card speaker-card">
+                        <img src="assets/images/ayse.jpg" width="200" height="250" class="card-img-top" alt="Speaker 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ayşe Demir</h5>
+                            <p class="card-text">Blockchain Uzmanı</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-dark me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card speaker-card">
+                        <img src="assets/images/mehmet.jpg" width="200" height="250" class="card-img-top" alt="Speaker 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Mehmet Kaya</h5>
+                            <p class="card-text">UX Tasarımcısı</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-dark me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card speaker-card">
+                        <img src="assets/images/zeynep.jpg" width="200" height="250" class="card-img-top" alt="Speaker 4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Zeynep Ak</h5>
+                            <p class="card-text">Siber Güvenlik Uzmanı</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-dark me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section id="schedule" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Program Akışı</h2>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="timeline-item">
+                        <h4>Kayıt ve Kahvaltı</h4>
+                        <p class="text-muted">09:00 - 10:00</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Açılış Konuşması</h4>
+                        <p class="text-muted">10:00 - 10:30</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>AI ve Gelecek Teknolojileri</h4>
+                        <p class="text-muted">10:30 - 12:00</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Öğle Yemeği</h4>
+                        <p class="text-muted">12:00 - 13:00</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Workshop Oturumları</h4>
+                        <p class="text-muted">13:00 - 15:00</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Networking Etkinliği</h4>
+                        <p class="text-muted">15:00 - 16:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KAYIT -->
+    <section id="register" class="register-section py-5 text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Yerinizi Ayırtın</h2>
+                    <p class="lead mb-4">Erken kayıt avantajlarından yararlanın!</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check me-2"></i> Tüm konferans oturumlarına erişim</li>
+                        <li class="mb-2"><i class="fas fa-check me-2"></i> Workshop katılım hakkı</li>
+                        <li class="mb-2"><i class="fas fa-check me-2"></i> Networking fırsatları</li>
+                        <li class="mb-2"><i class="fas fa-check me-2"></i> Dijital materyal paketi</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Ad Soyad</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-posta</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Telefon</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="company" class="form-label">Şirket</label>
+                                    <input type="text" class="form-control" id="company">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Hemen Kaydol</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p>
+                        <i class="fas fa-map-marker-alt me-2"></i> ELAZIĞ ŞEHİT MUAMMER FARUK SALGAR GENÇLİK MERKEZİ<br>
+                        <i class="fas fa-phone me-2"></i> (0424) 444 0000<br>
+                        <i class="fas fa-envelope me-2"></i> info@gsbelazig.com
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-light text-decoration-none">Ana Sayfa</a></li>
+                        <li><a href="#about" class="text-light text-decoration-none">Hakkında</a></li>
+                        <li><a href="#speakers" class="text-light text-decoration-none">Konuşmacılar</a></li>
+                        <li><a href="#schedule" class="text-light text-decoration-none">Program</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sosyal Medya</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2024 Tech Summit. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
